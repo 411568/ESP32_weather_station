@@ -1,27 +1,32 @@
 import sys
-from PyQt5 import QtWidgets, QtCore
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout
-from PyQt5.QtCore import Qt
-
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # window title
         self.setWindowTitle('Weather station')
 
-        # set the grid layout
+        # set starting size
+        self.setGeometry(100, 100, 1400, 800)
+
+        # set the layout (grid)
         layout = QGridLayout()
         self.setLayout(layout)
+
+        ############################################ FIGURES ############################################
 
         #temperature figure
         self.figureTemp = plt.figure(figsize=(5, 5))
         self.figureTempCanvas = FigureCanvas(self.figureTemp)
-        layout.addWidget(self.figureTempCanvas, 0, 0)
+        layout.addWidget(self.figureTempCanvas, 1, 0)
         # create an axis
         x = range(0, 10)
         y = range(0, 20, 2)
@@ -34,7 +39,7 @@ class MainWindow(QWidget):
         #pressure figure
         self.figurePress = plt.figure(figsize=(5, 5))
         self.figurePressCanvas = FigureCanvas(self.figurePress)
-        layout.addWidget(self.figurePressCanvas, 0, 1)
+        layout.addWidget(self.figurePressCanvas, 1, 1)
            # create an axis
         x = range(0, 10)
         y = range(0, 50, 5)
@@ -47,7 +52,7 @@ class MainWindow(QWidget):
         # altitude figure
         self.figureAlt = plt.figure(figsize=(5, 5))
         self.figureAltCanvas = FigureCanvas(self.figureAlt)
-        layout.addWidget(self.figureAltCanvas, 0, 2)
+        layout.addWidget(self.figureAltCanvas, 1, 2)
         # create an axis
         x = range(0, 10)
         y = range(0, 50, 5)
@@ -60,7 +65,7 @@ class MainWindow(QWidget):
         # humidity figure
         self.figureHum = plt.figure(figsize=(5, 5))
         self.figureHumCanvas = FigureCanvas(self.figureHum)
-        layout.addWidget(self.figureHumCanvas, 1, 0)
+        layout.addWidget(self.figureHumCanvas, 2, 0)
         # create an axis
         x = range(0, 10)
         y = range(0, 20, 2)
@@ -73,7 +78,7 @@ class MainWindow(QWidget):
         # windspeed figure
         self.figureWind = plt.figure(figsize=(5, 5))
         self.figureWindCanvas = FigureCanvas(self.figureWind)
-        layout.addWidget(self.figureWindCanvas, 1, 1)
+        layout.addWidget(self.figureWindCanvas, 2, 1)
         # create an axis
         x = range(0, 10)
         y = range(0, 20, 2)
@@ -86,7 +91,7 @@ class MainWindow(QWidget):
         # rain figure
         self.figureRain = plt.figure(figsize=(5, 5))
         self.figureRainCanvas = FigureCanvas(self.figureRain)
-        layout.addWidget(self.figureRainCanvas, 1, 2)
+        layout.addWidget(self.figureRainCanvas, 2, 2)
         # create an axis
         x = range(0, 10)
         y = range(0, 20, 2)
@@ -96,11 +101,31 @@ class MainWindow(QWidget):
         # show canvas
         self.figureRainCanvas.show()
 
-        # username
 
-        # buttons
-        layout.addWidget(QPushButton('Update'), 2, 0, alignment=Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(QPushButton('Prediction ON/OFF'), 2, 1, alignment=Qt.AlignmentFlag.AlignCenter)
+        ############################################ Bottom row ############################################
+
+        # for testing only
+        battery_level = 0
+
+        # battery level indicator
+        battery_level_label = QLabel("Battery status: " + str(battery_level) + "%")
+        battery_level_label.setFont(QFont('Times', 20))
+        layout.addWidget(battery_level_label, 3, 1, alignment=Qt.AlignCenter)
+
+        # update button
+        update_button = QPushButton("Update")
+        update_button.setGeometry(0, 0, 200, 10)
+        update_button.setFont(QFont('Times', 20))
+        update_button.resize(400, 20)
+        layout.addWidget(update_button, 3, 0)
+
+        # prediction on/off
+        forecast_button = QPushButton("Forecast ON/OFF")
+        forecast_button.setFont(QFont('Times', 20))
+        update_button.resize(400, 20)
+        layout.addWidget(forecast_button, 3, 2)
+
+
 
         # show the window
         self.show()
