@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=RX0 Pin=P6-3
+Removed Pin From Net: NetName=RX0 Pin=U1-6
+Added Pin To Net: NetName=RX2 Pin=P6-3
+Added Pin To Net: NetName=RX2 Pin=U1-6
+Added Net: Name=RX2
+Added Room: Name=esp32_weather_station_schematic_main

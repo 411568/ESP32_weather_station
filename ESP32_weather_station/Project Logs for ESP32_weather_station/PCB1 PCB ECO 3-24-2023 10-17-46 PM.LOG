@@ -1,0 +1,41 @@
+Added Component: Designator=U1(MODULE_ESP32_DEVKIT_V1)
+Add component (AddParameter): Name = "Availability"; Value = "Not in stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/ESP32-DEVKIT-V1/Do+it/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Do it"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "ESP32-DEVKIT-V1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/ESP32-DEVKIT-V1/Do+it/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+3.3V Pin=U1-1
+Added Pin To Net: NetName=ADDR_BH Pin=U1-2
+Added Pin To Net: NetName=D15 Pin=U1-3
+Added Pin To Net: NetName=BATT_SENS Pin=U1-4
+Added Pin To Net: NetName=YL-83_A0 Pin=U1-5
+Added Pin To Net: NetName=RX0 Pin=U1-6
+Added Pin To Net: NetName=TX2 Pin=U1-7
+Added Pin To Net: NetName=D5 Pin=U1-8
+Added Pin To Net: NetName=D18 Pin=U1-9
+Added Pin To Net: NetName=D19 Pin=U1-10
+Added Pin To Net: NetName=SDA Pin=U1-11
+Added Pin To Net: NetName=RX0 Pin=U1-12
+Added Pin To Net: NetName=TX0 Pin=U1-13
+Added Pin To Net: NetName=SCL Pin=U1-14
+Added Pin To Net: NetName=YL-83_D0 Pin=U1-15
+Added Pin To Net: NetName=EN Pin=U1-16
+Added Pin To Net: NetName=VP Pin=U1-17
+Added Pin To Net: NetName=VN Pin=U1-18
+Added Pin To Net: NetName=D34 Pin=U1-19
+Added Pin To Net: NetName=D35 Pin=U1-20
+Added Pin To Net: NetName=D32 Pin=U1-21
+Added Pin To Net: NetName=D33 Pin=U1-22
+Added Pin To Net: NetName=Hall_out Pin=U1-23
+Added Pin To Net: NetName=D26 Pin=U1-24
+Added Pin To Net: NetName=D27 Pin=U1-25
+Added Pin To Net: NetName=D14 Pin=U1-26
+Added Pin To Net: NetName=D12 Pin=U1-27
+Added Pin To Net: NetName=D13 Pin=U1-28
+Added Pin To Net: NetName=ADDR_BH Pin=U1-29
+Added Pin To Net: NetName=+5V Pin=U1-30
+Added Member To Class: ClassName=esp32_weather_station_schematic_main Member=Component U1 ESP32-DEVKIT-V1
+Added Room: Name=esp32_weather_station_schematic_main
