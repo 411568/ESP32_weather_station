@@ -1,0 +1,19 @@
+CAMtasticDXP Drill Report
+Serial Number:0000-00-00000
+Drill File: C:\Users\User\Documents\Temporary_documents\ESP32_weather_station\ESP32_weather_station\gerbers\v1\cam.drl
+Format: 2.4
+Units: English (Inch)
+Step & Repeat Codes Used: NO
+
+
+TOOL		SIZE		COUNT
+====		======		=====
+
+ 1 		0.0276		4
+ 2 		0.0280		43
+ 3 		0.0300		10
+ 4 		0.0350		30
+ 5 		0.0354		39
+ 6 		0.0700		2
+ 7 		0.1181		4
+ 8 		0.1181		4
