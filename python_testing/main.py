@@ -137,17 +137,16 @@ class MainWindow(QWidget):
         update_button.resize(400, 20)
         layout.addWidget(forecast_button, 3, 0, alignment = Qt.AlignRight)
 
-        button_scale = QPushButton("More values")
-        button_scale.setGeometry(0, 0, 200, 10)
-        button_scale.setFont(QFont('Times', 20))
-        button_scale.resize(400, 20)
-        layout.addWidget(button_scale, 3, 2, alignment = Qt.AlignRight)
 
-        button_scale_down = QPushButton("Less values")
-        button_scale_down.setGeometry(0, 0, 200, 10)
-        button_scale_down.setFont(QFont('Times', 20))
-        button_scale_down.resize(400, 20)
-        layout.addWidget(button_scale_down, 3, 2, alignment=Qt.AlignLeft)
+        date_label = QLabel("Date range")
+        date_label.setFont(QFont('Times', 20))
+        layout.addWidget(date_label, 3, 2, alignment = Qt.AlignLeft)
+
+        date_frame_widget = QComboBox()
+        date_frame_widget.setFont(QFont('Times', 20))
+        date_frame_widget.addItems(["Last day", "Last week", "Last month", "All"])
+        layout.addWidget(date_frame_widget, 3, 2, alignment = Qt.AlignRight)
+
 
         # show the window
         self.show()
