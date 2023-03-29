@@ -14,7 +14,7 @@ void setup()
   float altitude = get_altitude_reading();
   float light = get_light_reading();
   int rain = get_rain_adc_reading();
-  float wind = get_wind_speed_reading();
+  float wind = get_wind_speed_average();
   int battery_level = get_battery_level();
 
   //setup wifi (data logging)
@@ -28,7 +28,7 @@ void setup()
   Serial.flush(); 
 
   //go to sleep
-  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR); //sleep for 10 minutes
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR); //sleep for x minutes
   esp_deep_sleep_start();
 }
 

@@ -147,7 +147,7 @@ float get_wind_speed_reading()
     }
 
     //if taking too long to reach th
-    if(((micros()-start)/1000000.0) > 5)
+    if(((micros()-start)/1000000.0) > 3)
     {
       break;
     }    
@@ -159,4 +159,16 @@ float get_wind_speed_reading()
   float rpm_val = (hall_count/time_passed)*60.0;
   return rpm_val;
   delay(10);
+}
+
+float get_wind_speed_average()
+{
+  float sum = 0.0;
+ 
+  for(int i = 0; i < 5; i++)
+  {
+    sum += get_wind_speed_reading();
+  }
+  
+  return sum/5;
 }
