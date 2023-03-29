@@ -15,13 +15,14 @@ void setup()
   float light = get_light_reading();
   int rain = get_rain_adc_reading();
   float wind = get_wind_speed_reading();
+  int battery_level = get_battery_level();
 
   //setup wifi (data logging)
   wifi_setup();
   delay(5000);
 
   //send data to thingspeak
-  send_data(temp, humidity, pressure, altitude, light, rain, wind);
+  send_data(temp, humidity, pressure, altitude, light, rain, wind, battery_level);
   delay(5000);
 
   Serial.flush(); 

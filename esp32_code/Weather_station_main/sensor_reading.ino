@@ -16,6 +16,8 @@
 // hall sensor pin
 #define hall_pin 25
 
+// battery level adc pin
+#define battery_pin 2
 
 // SENSOR objects
 BH1750 lightMeter; // light sensor
@@ -103,6 +105,14 @@ bool is_it_raining()
   }
 }
 
+
+// ---------------- Battery level ---------------- ///
+int get_battery_level()
+{
+  int battery_adc = analogRead(battery_pin);
+  float battery_level = battery_adc / 40.96;
+  return battery_level;
+}
 
 
 // ---------------- Anemometer ---------------- //

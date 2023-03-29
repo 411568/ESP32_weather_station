@@ -31,7 +31,7 @@ void wifi_setup()
 }
 
 
-void send_data(float temp, float humidity, float pressure, float altitude, float light, int rain, float wind)
+void send_data(float temp, float humidity, float pressure, float altitude, float light, int rain, float wind, int battery)
 {
   Serial.begin(9600);
 
@@ -75,6 +75,9 @@ void send_data(float temp, float humidity, float pressure, float altitude, float
 
     data_to_send += "&field7=";
     data_to_send += String(wind);
+
+    data_to_send += "&field8=";
+    data_to_send += String(battery);    
 
     data_to_send += "\r\n\r\n";
 
