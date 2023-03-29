@@ -13,6 +13,9 @@
 //rain sensor threshold
 #define rain_threshold 2000
 
+// hall sensor pin
+#define hall_pin 25
+
 
 // SENSOR objects
 BH1750 lightMeter; // light sensor
@@ -35,6 +38,11 @@ void sensor_setup()
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);
   }
+
+  
+  pinMode(hall_pin, INPUT_PULLUP); //hall sensor input
+
+
 }
 
 // ---------------- BME280 ---------------- //
@@ -100,6 +108,44 @@ bool is_it_raining()
 // ---------------- Anemometer ---------------- //
 float get_wind_speed_reading()
 {
-  //TODO
-  return 0.0;
+  float hall_thresh = 100.0;
+  float hall_count = 1.0;
+  float start = micros(); // start the time count
+  bool on_state = false;
+
+  // counting number of times the hall sensor is tripped
+  // but without double counting during the same trip
+  while(true)
+  {
+    if (digitalRead(hall_pin) == 0)
+    {
+      if (on_state==false)
+      {
+        on_state = true;
+        hall_count += 1.0;
+      }
+    } else
+    {
+      on_state = false;
+    }
+    
+    //if threshold reached -> break
+    if (hall_count >= hall_thresh)
+    {
+      break;
+    }
+
+    //if taking too long to reach th
+    if(((micros()-start)/1000000.0) > 1)
+    {
+      break;
+    }    
+  }
+  
+  //calculate rpm
+  float end_time = micros();
+  float time_passed = ((end_time-start)/1000000.0);
+  float rpm_val = (hall_count/time_passed)*60.0;
+  return rpm_val;
+  delay(10);
 }
