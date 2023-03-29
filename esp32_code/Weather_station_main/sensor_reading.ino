@@ -118,7 +118,7 @@ int get_battery_level()
 // ---------------- Anemometer ---------------- //
 float get_wind_speed_reading()
 {
-  float hall_thresh = 100.0;
+  float hall_thresh = 10.0;
   float hall_count = 1.0;
   float start = micros(); // start the time count
   bool on_state = false;
@@ -134,7 +134,8 @@ float get_wind_speed_reading()
         on_state = true;
         hall_count += 1.0;
       }
-    } else
+    } 
+    else
     {
       on_state = false;
     }
@@ -146,7 +147,7 @@ float get_wind_speed_reading()
     }
 
     //if taking too long to reach th
-    if(((micros()-start)/1000000.0) > 1)
+    if(((micros()-start)/1000000.0) > 5)
     {
       break;
     }    
