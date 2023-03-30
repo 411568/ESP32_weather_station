@@ -147,7 +147,7 @@ float get_wind_speed_reading()
     }
 
     //if taking too long to reach th
-    if(((micros()-start)/1000000.0) > 3)
+    if(((micros()-start)/1000000.0) > 5)
     {
       break;
     }    
