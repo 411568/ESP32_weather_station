@@ -1,5 +1,5 @@
 import thingspeak_api as tsp_api
-
+import math
 
 # channel id
 test_channel_id = 2071282
@@ -60,4 +60,31 @@ def update_data_from_api():
     global battery_level_value
     battery_level_value = battery_level[len(date_list) - 1][1]
 
+    return temperature, humidity, pressure, illumination, wind_speed, rain
 
+
+# change data range, (date_range parameter tells us what date range we want)
+def change_date_range(date_range, temperature, humidity, pressure, illumination, wind_speed, rain):
+    print(temperature_list[1])
+
+    # clear all the data lists (we still keep the data in the "temperature", "humidity", etc lists for future use)
+    date_list.clear()
+    temperature_list.clear()
+    humidity_list.clear()
+    pressure_list.clear()
+    illumination_list.clear()
+    rain_list.clear()
+    wind_speed_list.clear()
+
+    # list of dates
+    for n in range(0, 2):
+        date_list.append(tsp_api.parse_date_string(temperature[n][0]))
+
+    # convert values
+    for n in range(0, 2):
+        temperature_list.append(float(temperature[n][1]))
+        humidity_list.append(float(humidity[n][1]))
+        pressure_list.append(float(pressure[n][1]))
+        illumination_list.append(float(illumination[n][1]))
+        rain_list.append(float(rain[n][1]))
+        wind_speed_list.append(float(wind_speed[n][1]))
