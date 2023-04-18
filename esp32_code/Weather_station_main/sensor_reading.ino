@@ -110,7 +110,7 @@ bool is_it_raining()
 int get_battery_level()
 {
   int battery_adc = analogRead(battery_pin);
-  float battery_level = battery_adc / 40.96;
+  int battery_level = battery_adc / 40;
   return battery_level;
 }
 
