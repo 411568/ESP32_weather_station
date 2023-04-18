@@ -25,6 +25,7 @@ void setup()
   send_data(temp, humidity, pressure, altitude, light, rain, wind, battery_level);
   delay(5000);
 
+  Serial.println("Data sent");
   Serial.flush(); 
 
   //go to sleep

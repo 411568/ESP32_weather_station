@@ -38,7 +38,7 @@ void sensor_setup()
   {
     Serial.begin(9600);
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
-    while (1);
+    //while (1);
   }
 
   
