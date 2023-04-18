@@ -62,7 +62,6 @@ def update_data_from_api():
     # get the last battery level reading
     global battery_level_value
     battery_level_value = battery_level[len(date_list) - 1][1]
-
     return temperature, humidity, pressure, illumination, wind_speed, rain
 
 

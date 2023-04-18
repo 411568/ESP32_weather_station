@@ -36,6 +36,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figureTempCanvas, 1, 0)
         self.tempx = self.figureTemp.add_subplot(111)
         self.tempx.plot(dm.date_list, dm.temperature_list)
+        self.tempx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.tempx.set_title("Temperature")
         # show canvas
         self.figureTempCanvas.show()
@@ -46,6 +47,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figurePressCanvas, 1, 1)
         self.pressx = self.figurePress.add_subplot(111)
         self.pressx.plot(dm.date_list, dm.pressure_list)
+        self.pressx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.pressx.set_title("Pressure")
         # show canvas
         self.figurePressCanvas.show()
@@ -56,6 +58,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figureIllCanvas, 1, 2)
         self.illx = self.figureIll.add_subplot(111)
         self.illx.plot(dm.date_list, dm.illumination_list)
+        self.illx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.illx.set_title("Illumination")
         # show canvas
         self.figureIllCanvas.show()
@@ -66,6 +69,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figureHumCanvas, 2, 0)
         self.humx = self.figureHum.add_subplot(111)
         self.humx.plot(dm.date_list, dm.humidity_list)
+        self.humx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.humx.set_title("Humidity")
         # show canvas
         self.figureHumCanvas.show()
@@ -76,6 +80,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figureWindCanvas, 2, 1)
         self.windx = self.figureWind.add_subplot(111)
         self.windx.plot(dm.date_list, dm.wind_speed_list)
+        self.windx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.windx.set_title("Wind speed")
         # show canvas
         self.figureWindCanvas.show()
@@ -86,6 +91,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.figureRainCanvas, 2, 2)
         self.rainx = self.figureRain.add_subplot(111)
         self.rainx.plot(dm.date_list, dm.rain_list)
+        self.rainx.xaxis.set_major_locator(plt.MaxNLocator(6))
         self.rainx.set_title("Precipation")
         # show canvas
         self.figureRainCanvas.show()
@@ -94,7 +100,8 @@ class MainWindow(QWidget):
         ############################################ Bottom row ############################################
 
         # battery level indicator
-        battery_level_label = QLabel("Battery status: " + str(dm.battery_level_value) + "%")
+        label_text = "Battery voltage: " + str(dm.battery_level_value).strip() + "V"
+        battery_level_label = QLabel(label_text)
         battery_level_label.setFont(QFont('Times', 20))
         layout.addWidget(battery_level_label, 3, 1, alignment=Qt.AlignCenter)
 
@@ -149,6 +156,14 @@ class MainWindow(QWidget):
         self.windx.plot(dm.date_list, dm.wind_speed_list)
         self.rainx.plot(dm.date_list, dm.rain_list)
         self.illx.plot(dm.date_list, dm.illumination_list)
+
+        # set ticks
+        self.tempx.xaxis.set_major_locator(plt.MaxNLocator(6))
+        self.pressx.xaxis.set_major_locator(plt.MaxNLocator(6))
+        self.humx.xaxis.set_major_locator(plt.MaxNLocator(6))
+        self.windx.xaxis.set_major_locator(plt.MaxNLocator(6))
+        self.rainx.xaxis.set_major_locator(plt.MaxNLocator(6))
+        self.illx.xaxis.set_major_locator(plt.MaxNLocator(6))
 
         # add titles
         self.tempx.set_title("Temperature")
