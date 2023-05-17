@@ -87,10 +87,11 @@ float get_light_reading()
 
 
 // ---------------- Rain sensor ---------------- //
-int get_rain_adc_reading()
+float get_rain_adc_reading()
 {
   int temp = analogRead(rain_sensor_pin);
-  return temp;
+  float perc_temp = (4096.0 - float(temp)) / 40.96; 
+  return perc_temp;
 }
 
 bool is_it_raining()
@@ -110,7 +111,8 @@ bool is_it_raining()
 int get_battery_level()
 {
   int battery_adc = analogRead(battery_pin);
-  int battery_level = battery_adc / 40;
+  int battery_level = (battery_adc - 2321) / 5.46; //estimate battery percentage level 
+  //the calculations above assume the max batt voltage to be 4.2V and lowest 3.4V
   return battery_level;
 }
 
@@ -119,7 +121,7 @@ int get_battery_level()
 float get_wind_speed_reading()
 {
   float hall_thresh = 10.0;
-  float hall_count = 1.0;
+  float hall_count = 0.0;
   float start = micros(); // start the time count
   bool on_state = false;
 
@@ -128,7 +130,7 @@ float get_wind_speed_reading()
   while(true)
   {
     if (digitalRead(hall_pin) == 0)
-    {
+    {      
       if (on_state==false)
       {
         on_state = true;
@@ -157,7 +159,9 @@ float get_wind_speed_reading()
   float end_time = micros();
   float time_passed = ((end_time-start)/1000000.0);
   float rpm_val = (hall_count/time_passed)*60.0;
-  return rpm_val;
+  //calculate wind speed in m/s
+  float wind_speed = 2 * 3.14 * 0.045 * rpm_val / 60; // 0.045 is the arm length (R)
+  return wind_speed;
   delay(10);
 }
 

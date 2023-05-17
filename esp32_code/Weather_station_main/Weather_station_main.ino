@@ -13,7 +13,7 @@ void setup()
   float pressure= get_pressure_reading();
   float altitude = get_altitude_reading();
   float light = get_light_reading();
-  int rain = get_rain_adc_reading();
+  float rain = get_rain_adc_reading();
   float wind = get_wind_speed_average();
   int battery_level = get_battery_level();
 

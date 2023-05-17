@@ -10,6 +10,8 @@ import data_manipulation as dm
 class MainWindow(QWidget):
 
     update_from_server = True
+    predictions = False
+    current_range = 3
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,7 +28,6 @@ class MainWindow(QWidget):
 
         # get data from server
         dm.temperature, dm.humidity, dm.pressure, dm.illumination, dm.wind_speed, dm.rain = dm.update_data_from_api()
-
 
         ############################################ FIGURES ############################################
 
@@ -117,7 +118,8 @@ class MainWindow(QWidget):
         # prediction on/off
         forecast_button = QPushButton("Forecast ON/OFF")
         forecast_button.setFont(QFont('Times', 20))
-        update_button.resize(400, 20)
+        forecast_button.resize(400, 20)
+        forecast_button.clicked.connect(self.prediction_change)
         layout.addWidget(forecast_button, 3, 0, alignment = Qt.AlignRight)
 
 
@@ -188,11 +190,25 @@ class MainWindow(QWidget):
     # change the data range on plots
     def change_date_range(self, i):
         # change the data lists (dm.date_list etc)
-        dm.change_date_range(i, dm.temperature, dm.humidity, dm.pressure, dm.illumination, dm.wind_speed, dm.rain)
+        self.current_range = i
+        if(self.predictions == False):
+            dm.change_date_range(self.current_range, False, dm.temperature, dm.humidity, dm.pressure, dm.illumination, dm.wind_speed, dm.rain)
+        else:
+            #with predictions on
+            dm.change_date_range(self.current_range, True, dm.temperature, dm.humidity, dm.pressure, dm.illumination, dm.wind_speed, dm.rain)
+
         # update figures without getting data from the server again
         self.update_from_server = False
         self.update_figures()
 
+    # prediction on/off button
+    def prediction_change(self):
+        if(self.predictions == False):
+            self.predictions = True
+        else:
+            self.predictions = False
+        # update the figures
+        self.change_date_range(self.current_range)
 
 
 if __name__ == '__main__':
