@@ -7,8 +7,8 @@ WiFiMulti wifiMulti;
 
 
 //WiFi setup
-const char* ssid     = "GONTWIFI_C6E8"; //SSID
-const char* password = "0715128612"; //Wifi password
+const char* ssid     =  "Warsztat Pana Mietka (224)"; // "GONTWIFI_C6E8"; //SSID
+const char* password = "213742069"; //"0715128612"; //Wifi password
 
 const char* host = "api.thingspeak.com";
 String api_key = "KLK85AR8GUKN9HKU"; // API Key provied by thingspeak
