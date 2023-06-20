@@ -1,4 +1,5 @@
 import datetime
+from PyQt5.QtWidgets import *
 
 import thingspeak_api as tsp_api
 from dateutil.relativedelta import relativedelta
@@ -112,7 +113,14 @@ def change_date_range(date_range, predictions):
             rain_list.append(float(rain[n][1]))
             wind_speed_list.append(float(wind_speed[n][1]))
 
-
+    # check if the list is empty
+    if len(date_list) < 5:
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Information)
+        msgBox.setText("No data to show in the selected date range!")
+        msgBox.setWindowTitle("Warning!")
+        msgBox.exec()
+        change_date_range(3, predictions) # show all the data
 
 
 
