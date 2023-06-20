@@ -28,7 +28,7 @@ class MainWindow(QWidget):
         self.tempx = self.figureTemp.add_subplot(111)
         self.tempx.plot(dm.date_list, dm.temperature_list)
         self.tempx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.tempx.set_title("Temperature")
+        self.tempx.set_title("Temperature [°C]")
         self.figureTempCanvas.show()
 
         #pressure figure
@@ -38,7 +38,7 @@ class MainWindow(QWidget):
         self.pressx = self.figurePress.add_subplot(111)
         self.pressx.plot(dm.date_list, dm.pressure_list)
         self.pressx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.pressx.set_title("Pressure")
+        self.pressx.set_title("Pressure [hPa]")
         self.figurePressCanvas.show()
 
         # altitude figure
@@ -48,7 +48,7 @@ class MainWindow(QWidget):
         self.illx = self.figureIll.add_subplot(111)
         self.illx.plot(dm.date_list, dm.illumination_list)
         self.illx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.illx.set_title("Illumination")
+        self.illx.set_title("Illumination [lx]")
         self.figureIllCanvas.show()
 
         # humidity figure
@@ -58,7 +58,7 @@ class MainWindow(QWidget):
         self.humx = self.figureHum.add_subplot(111)
         self.humx.plot(dm.date_list, dm.humidity_list)
         self.humx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.humx.set_title("Humidity")
+        self.humx.set_title("Humidity [%]")
         self.figureHumCanvas.show()
 
         # windspeed figure
@@ -68,7 +68,7 @@ class MainWindow(QWidget):
         self.windx = self.figureWind.add_subplot(111)
         self.windx.plot(dm.date_list, dm.wind_speed_list)
         self.windx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.windx.set_title("Wind speed")
+        self.windx.set_title("Wind speed [m/s]")
         self.figureWindCanvas.show()
 
         # rain figure
@@ -78,7 +78,7 @@ class MainWindow(QWidget):
         self.rainx = self.figureRain.add_subplot(111)
         self.rainx.plot(dm.date_list, dm.rain_list)
         self.rainx.xaxis.set_major_locator(plt.MaxNLocator(6))
-        self.rainx.set_title("Precipation")
+        self.rainx.set_title("Precipation [%]")
         self.figureRainCanvas.show()
 
 
@@ -154,12 +154,12 @@ class MainWindow(QWidget):
         self.illx.xaxis.set_major_locator(plt.MaxNLocator(6))
 
         # add titles
-        self.tempx.set_title("Temperature")
-        self.pressx.set_title("Pressure")
-        self.illx.set_title("Illumination")
-        self.humx.set_title("Humidity")
-        self.windx.set_title("Wind speed")
-        self.rainx.set_title("Precipation")
+        self.tempx.set_title("Temperature [°C]")
+        self.pressx.set_title("Pressure [hPa]")
+        self.illx.set_title("Illumination [lx]")
+        self.humx.set_title("Humidity [%]")
+        self.windx.set_title("Wind speed [m/s]")
+        self.rainx.set_title("Precipation [%]")
 
 
         # draw figures and show new plots
