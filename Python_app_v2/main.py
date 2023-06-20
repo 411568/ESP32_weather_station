@@ -186,7 +186,6 @@ class MainWindow(QWidget):
         # update figures without getting data from the server again
         self.update_from_server = False
         self.update_figures()
-        print(dm.temperature)
 
     # prediction on/off button
     def prediction_change(self):
