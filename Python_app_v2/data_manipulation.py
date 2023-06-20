@@ -48,9 +48,6 @@ def update_data_from_api():
     wind_speed = tsp_api.get_data_from_field(test_channel_id, 7)
     battery_level = tsp_api.get_data_from_field(test_channel_id, 8)
 
-    print(temperature)
-    print(humidity)
-
     temperature_list.clear()
     humidity_list.clear()
     pressure_list.clear()
