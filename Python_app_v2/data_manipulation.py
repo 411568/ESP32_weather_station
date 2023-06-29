@@ -78,6 +78,14 @@ def update_data_from_api():
 
 # change data range, (date_range parameter tells us what date range we want)
 def change_date_range(date_range, predictions):
+    global temperature_list
+    global humidity_list
+    global pressure_list
+    global date_list
+    global illumination_list
+    global rain_list
+    global wind_speed_list
+
     # clear all the data lists
     date_list.clear()
     temperature_list.clear()
@@ -139,5 +147,6 @@ def change_date_range(date_range, predictions):
         #auto arima models
         model_temp = SARIMAX(temperature_list, order=(0, 1, 2), seasonal_order=(0,1,2,4)).fit(dis=-1)
         print(model_temp.summary())
-      #  predicted_temp = pd.Series(model_temp.predict(n_perdiods = len(temperature_list)))
-      #  temperature_list.extend(predicted_temp)
+        predicted_temp = pd.Series(model_temp.predict(n_perdiods = 10))
+        temperature_list = predicted_temp.to_list()
+
