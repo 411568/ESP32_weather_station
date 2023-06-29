@@ -7,6 +7,7 @@ import math
 import pandas as pd
 from pmdarima import auto_arima
 from statsmodels.tsa.statespace.sarimax import SARIMAX
+from pmdarima.arima import auto_arima
 
 # channel id
 test_channel_id = 2071282
@@ -136,17 +137,46 @@ def change_date_range(date_range, predictions):
     if((predictions == True) and (len(date_list) > 0)):
         # add predicted data
         for n in range(0, 10):
-            date_list.append(date_list[len(date_list) - 1] + relativedelta(days=n))
-            temperature_list.append(0.0)
-            humidity_list.append(0.0)
-            pressure_list.append(0.0)
-            illumination_list.append(0.0)
-            wind_speed_list.append(0.0)
-            rain_list.append(0.0)
+            date_list.append(date_list[len(date_list) - 1] + relativedelta(minutes=2*n)) # if getting data every 20 minutes
 
-        #auto arima models
-        model_temp = SARIMAX(temperature_list, order=(0, 1, 2), seasonal_order=(0,1,2,4)).fit(dis=-1)
-        print(model_temp.summary())
-        predicted_temp = pd.Series(model_temp.predict(n_perdiods = 10))
-        temperature_list = predicted_temp.to_list()
+        # temperature prediction
+        arima_model = auto_arima(temperature_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        temperature_list.extend(prediction)
 
+        # humidity prediction
+        arima_model = auto_arima(humidity_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        humidity_list.extend(prediction)
+
+        # pressure prediction
+        arima_model = auto_arima(pressure_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        pressure_list.extend(prediction)
+
+        # illumination prediction
+        arima_model = auto_arima(illumination_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        illumination_list.extend(prediction)
+
+        # wind speed prediction
+        arima_model = auto_arima(wind_speed_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        wind_speed_list.extend(prediction)
+
+        # rain prediction
+        arima_model = auto_arima(rain_list[-20:], start_p=0,test="adf", start_q=0,max_d=5,max_q=5,start_P=0,D=1,
+                                 startQ=5,max_P=5,max_D=5,max_Q=5,seasonal=True,supress_warnings=True,
+                                 stepwise=True,random_state=20, n_fits=40)
+        prediction = arima_model.predict(n_periods=10)
+        rain_list.extend(prediction)
