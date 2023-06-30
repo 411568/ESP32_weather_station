@@ -10,7 +10,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 from pmdarima.arima import auto_arima
 
 # channel id
-test_channel_id =  2071282   #2208447  #
+test_channel_id = 2071282  #2208447 #   #2208447  #
 
 # all the data from server
 temperature = []
@@ -159,27 +159,22 @@ def change_date_range(date_range, predictions):
                                                  startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True,
                                                  supress_warnings=True,
                                                  stepwise=True, random_state=20, n_fits=40)
-            print("I am here")
             arima_model_humidity = auto_arima(humidity_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                               start_P=0, D=1,
                                               startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
                                               stepwise=True, random_state=20, n_fits=40)
-            print("I am here")
             arima_model_pressure = auto_arima(pressure_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                               start_P=0, D=1,
                                               startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
                                               stepwise=True, random_state=20, n_fits=40)
-            print("I am here")
             arima_model_ill = auto_arima(illumination_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                          start_P=0, D=1,
                                          startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
                                          stepwise=True, random_state=20, n_fits=40)
-            print("I am here")
             arima_model_wind = auto_arima(wind_speed_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                           start_P=0, D=1,
                                           startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
                                           stepwise=True, random_state=20, n_fits=40)
-            print("I am here")
             arima_model_rain = auto_arima(rain_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                           start_P=0, D=1,
                                           startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
