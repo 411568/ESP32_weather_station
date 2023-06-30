@@ -5,7 +5,7 @@ import datetime
 # this funstion returns a list of data from a single data field in the format of [created_at, data]
 # example usage: temperature = get_data_from_field(test_channel_id, 1)
 def get_data_from_field(channel_id, field_num):
-    ch = thingspeak.Channel(channel_id)             #    00LUS877DPTHNZ4U
+    ch = thingspeak.Channel(channel_id)             #       00LUS877DPTHNZ4U
     all_data = ch.get({'api_key': "DR7YSD5BKRMKLKSI", 'results': 500}) # get all the data (results limited to 500 because not all data is available from the beginning
     all_data_parsed = json.loads(all_data)
     last_entry = ch.get_field_last(1)                        # get last data json

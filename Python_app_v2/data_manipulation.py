@@ -10,7 +10,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 from pmdarima.arima import auto_arima
 
 # channel id
-test_channel_id = 2071282  #2208447 #   #2208447  #
+test_channel_id = 2071282  # 2208447 #     #2208447  #
 
 # all the data from server
 temperature = []
@@ -144,7 +144,7 @@ def change_date_range(date_range, predictions):
     if((predictions == True) and (len(date_list) > 0)):
         # add predicted data
         for n in range(0, 10):
-            date_list.append(date_list[len(date_list) - 1] + relativedelta(minutes=2*n)) # if getting data every 20 minutes
+            date_list.append(date_list[len(date_list) - 1] + relativedelta(days = 1))   # minutes=2*n if getting data every 20 minutes
 
         global arima_model_temperature
         global arima_model_humidity
@@ -153,32 +153,84 @@ def change_date_range(date_range, predictions):
         global arima_model_wind
         global arima_model_rain
 
+        daily_temp = []
+        daily_humidity = []
+        daily_pressure = []
+        daily_ill = []
+        daily_wind = []
+        daily_rain = []
+
+        # calculate the sarima models if not done yet
         if arima_model_temperature is None:
-            arima_model_temperature = auto_arima(temperature_list[-20:], start_p=0, test="adf", start_q=0, max_d=5,
+            # calculate the average parameters for every day
+            for i in range(0, len(temperature_list) - 1):
+                current_day = date_list[i].day
+                current_month = date_list[i].month
+                current_year = date_list[i].year
+
+                if date_list[len(temperature_list) - 1].day == current_day and date_list[
+                    len(temperature_list) - 1].month == current_month and date_list[
+                    len(temperature_list) - 1].year == current_year:
+                    break
+
+                avg_temp = 0.0
+                avg_hum = 0.0
+                avg_press = 0.0
+                avg_ill = 0.0
+                avg_wind = 0.0
+                avg_rain = 0.0
+
+                counter = 0
+
+                for j in range(0, len(temperature_list) - i - 1):
+                    if date_list[i + j].day == current_day and date_list[i].month == current_month and date_list[
+                        i].year == current_year:
+                        counter = counter + 1
+                        avg_temp += temperature_list[i + j]
+                        avg_hum += humidity_list[i + j]
+                        avg_press += pressure_list[i + j]
+                        avg_ill += illumination_list[i + j]
+                        avg_wind += wind_speed_list[i + j]
+                        avg_rain += rain_list[i + j]
+                    else:
+                        break
+
+                daily_temp.append(avg_temp / counter)
+                daily_humidity.append(avg_hum / counter)
+                daily_pressure.append(avg_press / counter)
+                daily_ill.append(avg_ill / counter)
+                daily_rain.append(avg_rain / counter)
+                daily_wind.append(avg_wind / counter)
+
+                i = i + counter
+
+            # find the models
+            arima_model_temperature = auto_arima(daily_temp, start_p=0, test="adf", start_q=0, max_d=5,
                                                  max_q=5, start_P=0, D=1,
                                                  startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True,
                                                  supress_warnings=True,
-                                                 stepwise=True, random_state=20, n_fits=40)
-            arima_model_humidity = auto_arima(humidity_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
+                                                 stepwise=True, random_state=20, n_fits=40) # temperature_list[-20:]
+            arima_model_humidity = auto_arima(daily_humidity, start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                               start_P=0, D=1,
                                               startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
-                                              stepwise=True, random_state=20, n_fits=40)
-            arima_model_pressure = auto_arima(pressure_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
+                                              stepwise=True, random_state=20, n_fits=40) #humidity_list[-20:]
+            arima_model_pressure = auto_arima(daily_pressure, start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                               start_P=0, D=1,
                                               startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
-                                              stepwise=True, random_state=20, n_fits=40)
-            arima_model_ill = auto_arima(illumination_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
+                                              stepwise=True, random_state=20, n_fits=40) # pressure_list[-20:]
+            arima_model_ill = auto_arima(daily_ill, start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                          start_P=0, D=1,
                                          startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
-                                         stepwise=True, random_state=20, n_fits=40)
-            arima_model_wind = auto_arima(wind_speed_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
+                                         stepwise=True, random_state=20, n_fits=40) #illumination_list[-20:]
+            arima_model_wind = auto_arima(daily_wind, start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                           start_P=0, D=1,
                                           startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
-                                          stepwise=True, random_state=20, n_fits=40)
-            arima_model_rain = auto_arima(rain_list[-20:], start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
+                                          stepwise=True, random_state=20, n_fits=40) #wind_speed_list[-20:]
+            arima_model_rain = auto_arima(daily_rain, start_p=0, test="adf", start_q=0, max_d=5, max_q=5,
                                           start_P=0, D=1,
                                           startQ=5, max_P=5, max_D=5, max_Q=5, seasonal=True, supress_warnings=True,
-                                          stepwise=True, random_state=20, n_fits=40)
+                                          stepwise=True, random_state=20, n_fits=40) #
+
         # temperature prediction
         prediction = arima_model_temperature.predict(n_periods=10)
         temperature_list.extend(prediction)
