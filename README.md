@@ -27,7 +27,8 @@ The electronics design is pretty simple, consisting mostly of ready to use modul
 
 <h2>🎐 Diy anemometer</h2>
 As the commercially available anemometers are pretty big and expensive I decided to go for a small 3d printed version.
-![anemometer](/assets/images/esp32_weather_station/anemometer.PNG)
+
+![anemometer](/images/anemometer.PNG)
 
 To read the wind speed I use a simple digital hall sensor reading the changing magnetic field from the rotating magnes placed on the anemometer shaft. 
 Knowing how many times the magnetic field changed in a period of time we calculate the RPM and from that, the wind speed.
