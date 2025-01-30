@@ -20,9 +20,9 @@ The enclousure that you see below was made from plywood cut on a CNC machine. I 
 
 The electronics design is pretty simple, consisting mostly of ready to use modules, put together on a simple PCB. That is why I am not gonna go ito the details of it.
 
-![schematic](/assets/images/esp32_weather_station/schematic_1.PNG)
+![schematic](/images/schematic_1.PNG)
 
-![PCB](/assets/images/esp32_weather_station/pcb_1.PNG)
+![PCB](/images/pcb_1.PNG)
 
 
 <h2>🎐 Diy anemometer</h2>
@@ -61,7 +61,7 @@ After it's done that, it goes to sleep for a specified period of time to save ba
   esp_deep_sleep_start();
  ```
 
-<h2>💻 Python app</he>
+<h2>💻 Python app</h2>
 
 ![GUI view](/images/gui_view.png)
 
